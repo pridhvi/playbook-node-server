@@ -32,8 +32,8 @@ const getCoverById = async (req, res) => {
   where id = ${req.params.id};`;
 
   const cover = await axios.post(`${IGDB_API_URL}/covers`, data, config);
-  console.log(cover.data[0].url);
-  return res.json(cover.data[0].url);
+//   console.log(cover.data[0].url);
+  return res.json(cover.data[0]);
 };
 
 export default (app) => {
