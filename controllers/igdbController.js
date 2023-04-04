@@ -4,8 +4,10 @@ const IGDB_API_URL = "https://api.igdb.com/v4";
 
 const config = {
   headers: {
-    "Client-ID": process.env.CLIENT_ID,
-    Authorization: process.env.ACCESS_TOKEN
+    // "Client-ID": process.env.CLIENT_ID,
+    // Authorization: process.env.ACCESS_TOKEN
+    "Client-ID": "xbkb34auz0iwe92z06zbbsj7xnekr6",
+    Authorization: "Bearer 35g8t2249ig2rcv9ee6lyv6e3g626l"
   },
 };
 
@@ -36,8 +38,27 @@ const getCoverById = async (req, res) => {
   return res.json(cover.data[0]);
 };
 
+const getPlatformById = async (req, res) => {
+  const data = `f abbreviation,alternative_name,category,checksum,created_at,generation,name,platform_family,platform_logo,slug,summary,updated_at,url,versions,websites;where id = ${req.params.id};`;
+
+  const platform = await axios.post(`${IGDB_API_URL}/platforms`, data, config);
+  // console.log(req.params.id);
+  return res.json(platform.data);
+};
+
+const getPlatformLogoById = async (req, res) => {
+  const data = `fields alpha_channel,animated,checksum,height,image_id,url,width;
+  where id = ${req.params.id};`;
+
+  const platformLogo = await axios.post(`${IGDB_API_URL}/platform_logos`, data, config);
+//   console.log(cover.data[0].url);
+  return res.json(platformLogo.data[0]);
+};
+
 export default (app) => {
   app.get("/api/igdb/search", getSearchCriteria);
   app.get("/api/igdb/games/:id", getGameById);
   app.get("/api/igdb/covers/:id", getCoverById);
+  app.get("/api/igdb/platforms/:id", getPlatformById);
+  app.get("/api/igdb/platform_logos/:id", getPlatformLogoById);
 };
