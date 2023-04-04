@@ -30,6 +30,34 @@ const getGameById = async (req, res) => {
   // console.log(req.params.id);
 };
 
+const getCharacterById = async (req, res) => {
+  const data = `f akas,checksum,country_name,created_at,description,games,gender,mug_shot,name,slug,species,updated_at,url;where id = ${req.params.id};`;
+  setTimeout(async () => {
+    const character = await axios.post(
+      `${IGDB_API_URL}/characters`,
+      data,
+      config
+    );
+    return res.json(character.data);
+  }, 1000);
+  // console.log(req.params.id);
+};
+
+const getMugshotById = async (req, res) => {
+  setTimeout(async () => {
+    const data = `fields alpha_channel,animated,checksum,height,image_id,url,width;
+  where id = ${req.params.id};`;
+
+    const cover = await axios.post(
+      `${IGDB_API_URL}/character_mug_shots`,
+      data,
+      config
+    );
+    //   console.log(cover.data[0].url);
+    return res.json(cover.data[0]);
+  }, 1000);
+};
+
 const getCoverById = async (req, res) => {
   setTimeout(async () => {
     const data = `fields alpha_channel,animated,checksum,game,game_localization,height,image_id,url,width;
@@ -42,30 +70,41 @@ const getCoverById = async (req, res) => {
 };
 
 const getPlatformById = async (req, res) => {
-  const data = `f abbreviation,alternative_name,category,checksum,created_at,generation,name,platform_family,platform_logo,slug,summary,updated_at,url,versions,websites;where id = ${req.params.id};`;
+  setTimeout(async () => {
+    const data = `f abbreviation,alternative_name,category,checksum,created_at,generation,name,platform_family,platform_logo,slug,summary,updated_at,url,versions,websites;where id = ${req.params.id};`;
 
-  const platform = await axios.post(`${IGDB_API_URL}/platforms`, data, config);
-  // console.log(req.params.id);
-  return res.json(platform.data);
+    const platform = await axios.post(
+      `${IGDB_API_URL}/platforms`,
+      data,
+      config
+    );
+    console.log(req.params.id);
+    return res.json(platform.data);
+  }, 1000);
 };
 
 const getPlatformLogoById = async (req, res) => {
-  const data = `fields alpha_channel,animated,checksum,height,image_id,url,width;
+  setTimeout(async () => {
+    const data = `fields alpha_channel,animated,checksum,height,image_id,url,width;
   where id = ${req.params.id};`;
 
-  const platformLogo = await axios.post(
-    `${IGDB_API_URL}/platform_logos`,
-    data,
-    config
-  );
-  //   console.log(cover.data[0].url);
-  return res.json(platformLogo.data[0]);
+    const platformLogo = await axios.post(
+      `${IGDB_API_URL}/platform_logos`,
+      data,
+      config
+    );
+    //   console.log(cover.data[0].url);
+    return res.json(platformLogo.data[0]);
+  }, 1000);
 };
 
 export default (app) => {
   app.get("/api/igdb/search", getSearchCriteria);
   app.get("/api/igdb/games/:id", getGameById);
+  app.get("/api/igdb/character_mug_shots/:id", getMugshotById);
   app.get("/api/igdb/covers/:id", getCoverById);
+  getMugshotById;
+  app.get("/api/igdb/characters/:id", getCharacterById);
   app.get("/api/igdb/platforms/:id", getPlatformById);
   app.get("/api/igdb/platform_logos/:id", getPlatformLogoById);
 };
