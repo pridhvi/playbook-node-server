@@ -14,3 +14,6 @@ app.use(cors())
 IgdbApiController(app)
 app.listen(process.env.PORT || 4000);
 // app.listen(4000);
+app.use(function(err, req, res, next) {
+    res.status(err.status || 400 || 429).json(response.error(err.status || 400 || 429));
+});
