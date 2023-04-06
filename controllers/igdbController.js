@@ -11,19 +11,13 @@ const config = {
 
 const getSearchCriteria = async (req, res) => {
   try {
-    setTimeout(async () => {
-      const data = `search "${req.query.criteria}";
-      \nf alternative_name,character,checksum,collection,company,description,game,name,platform,published_at,test_dummy,theme;
+    const data = `search "${req.query.criteria}";
+      \nf alternative_name,character.mug_shot.url,character.description,checksum,collection,company,description,game.cover.url,game.summary,name,platform,published_at,test_dummy,theme;
       \nw ${req.query.type}!=n;
       \nl ${req.query.pageSize};
       \no ${req.query.pageNumber};`;
-      const searchData = await axios.post(
-        `${IGDB_API_URL}/search`,
-        data,
-        config
-      );
-      return res.json(searchData.data);
-    }, 1000);
+    const searchData = await axios.post(`${IGDB_API_URL}/search`, data, config);
+    return res.json(searchData.data);
   } catch (error) {
     console.log(error);
   }
