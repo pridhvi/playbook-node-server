@@ -1,3 +1,4 @@
+import axios from "axios";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -12,20 +13,21 @@ mongoose.connect(CONNECTION_STRING)
 
 const app = express();
 app.use(express.json());
-// app.use(cors());
+
 app.set("trust proxy", 1);
 app.use(
   session({
     secret: "asdfasdfasdfasdf",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }, // needs HTTPS
+    // cookie: { secure: true }, // needs HTTPS
   })
 );
 app.use(
   cors({
     credentials: true,
-    origin: "http://playbook.pridhvi.net",
+    origin: "https://playbook.pridhvi.net",
+    // origin: "http://localhost:5173",
   })
 );
 
