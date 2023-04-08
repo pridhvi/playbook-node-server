@@ -4,8 +4,10 @@ const IGDB_API_URL = "https://api.igdb.com/v4";
 
 const config = {
   headers: {
-    "Client-ID": process.env.CLIENT_ID,
-    Authorization: process.env.ACCESS_TOKEN
+    // "Client-ID": process.env.CLIENT_ID,
+    // Authorization: process.env.ACCESS_TOKEN
+    "Client-ID": "xbkb34auz0iwe92z06zbbsj7xnekr6",
+    Authorization: "Bearer 35g8t2249ig2rcv9ee6lyv6e3g626l",
   },
 };
 
