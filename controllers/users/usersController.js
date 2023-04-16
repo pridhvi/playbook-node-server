@@ -10,6 +10,15 @@ const UserController = (app) => {
     //   res.sendStatus(403);
     // }
   };
+
+  const findUserByUsername = async (req, res) => {
+    // if (currentUser && currentUser.isAdmin) {
+    const user = await usersDao.findUserByUsername(req.params.username);
+    res.json(user);
+    // } else {
+    //   res.sendStatus(403);
+    // }
+  };
   // const findUserById = async (req, res) => {
   //   const user = await usersDao.findUserById(req.params.userId);
   //   if (user) {
@@ -108,6 +117,7 @@ const UserController = (app) => {
   });
 
   app.get("/api/users", findAllUsers);
+  app.get("/api/users/:username", findUserByUsername);
   app.get("/api/users/isUser/:username", isUser);
   app.post("/api/users/signup", signup);
   app.put("/api/users/:userId", updateUser);
