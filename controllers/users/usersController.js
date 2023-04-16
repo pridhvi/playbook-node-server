@@ -51,7 +51,8 @@ const UserController = (app) => {
     // users[index] = newUser;
     const status = await usersDao.updateUser(userId, req.body);
     req.session["currentUser"] = req.body;
-    res.send(status);
+    // res.send(status);
+    res.json(req.body);
   };
   // const deleteUser = async (req, res) => {
   //   const userId = req.params.userId;
