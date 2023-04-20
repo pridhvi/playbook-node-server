@@ -7,6 +7,8 @@ import IgdbApiController from "./controllers/igdbController.js";
 import UserController from "./controllers/users/usersController.js";
 import SessionController from './controllers/sessionController.js'
 import CommentsController from "./controllers/comments/commentsController.js";
+import FollowsController from "./controllers/follows/followsController.js";
+import RatingsController from "./controllers/ratings/ratingsController.js";
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/playbook'
 
@@ -36,5 +38,7 @@ IgdbApiController(app);
 UserController(app);
 SessionController(app);
 CommentsController(app);
+FollowsController(app);
+RatingsController(app);
 
 app.listen(process.env.PORT || 4000);
