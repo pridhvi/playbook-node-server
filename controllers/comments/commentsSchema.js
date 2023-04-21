@@ -17,6 +17,7 @@ const commentsSchema = new mongoose.Schema(
     },
     likesUsernames: [String],
     dislikesUsernames: [String],
+    isFlagged: {type: Boolean, default: false},
     createdAt: { type: Date, default: Date.now },
   },
   { collection: "comments" }

@@ -70,13 +70,14 @@ const UserController = (app) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const password = req.body.password;
+    const role = req.body.role;
     const user = await usersDao.findUserByUsername(username);
     if (user) {
       res.sendStatus(409);
       return;
     }
 
-    const newUser = { username, firstName, lastName, password };
+    const newUser = { username, firstName, lastName, password, role };
     req.session["currentUser"] = newUser;
     usersDao
       .createUser(newUser)

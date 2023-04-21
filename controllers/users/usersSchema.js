@@ -10,11 +10,11 @@ const usersSchema = new mongoose.Schema(
     location: { type: String, default: "" },
     // email: String,
     createdAt: { type: Date, default: Date.now },
-    isAdmin: { type: Boolean, default: false },
+    // isAdmin: { type: Boolean, default: false },
     role: {
       type: String,
       default: "user",
-      enum: ["admin", "user", "guest", "moderator"],
+      enum: ["admin", "user", "moderator"],
     },
   },
   { collection: "users" }
