@@ -1,4 +1,3 @@
-import axios from "axios";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -9,6 +8,7 @@ import SessionController from './controllers/sessionController.js'
 import CommentsController from "./controllers/comments/commentsController.js";
 import FollowsController from "./controllers/follows/followsController.js";
 import RatingsController from "./controllers/ratings/ratingsController.js";
+import TrendingController from "./controllers/trendingController.js";
 
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://localhost:27017/playbook'
 
@@ -40,5 +40,6 @@ SessionController(app);
 CommentsController(app);
 FollowsController(app);
 RatingsController(app);
+TrendingController(app);
 
 app.listen(process.env.PORT || 4000);

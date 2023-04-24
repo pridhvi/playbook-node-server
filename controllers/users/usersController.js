@@ -1,4 +1,3 @@
-// import users from "./users.js";
 import * as usersDao from "./usersDao.js";
 
 const UserController = (app) => {
@@ -19,14 +18,7 @@ const UserController = (app) => {
     //   res.sendStatus(403);
     // }
   };
-  // const findUserById = async (req, res) => {
-  //   const user = await usersDao.findUserById(req.params.userId);
-  //   if (user) {
-  //     res.json(user);
-  //     return;
-  //   }
-  //   res.sendStatus(404);
-  // };
+  
   const isUser = async (req, res) => {
     // console.log(req.params.username)
     const user = await usersDao.findUserByUsername(req.params.username);
@@ -34,26 +26,14 @@ const UserController = (app) => {
     else res.sendStatus(404);
   };
 
-  //   const createUser = async (req, res) => {
-  //     const user = { ...req.body, _id: new Date().getTime() + "" };
-  //     users.push(user);
-  //     res.json(user);
-  //   };
-
   const updateUser = async (req, res) => {
     const userId = req.params.userId;
-    // const newUser = req.body;
-    // const index = users.findIndex((user) => user._id === userId);
-    // if (index === -1) {
-    //   res.sendStatus(404);
-    //   return;
-    // }
-    // users[index] = newUser;
     const status = await usersDao.updateUser(userId, req.body);
     req.session["currentUser"] = req.body;
     // res.send(status);
     res.json(req.body);
   };
+
   // const deleteUser = async (req, res) => {
   //   const userId = req.params.userId;
   //   const index = users.findIndex((user) => user._id === userId);

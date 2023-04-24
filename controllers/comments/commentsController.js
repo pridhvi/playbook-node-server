@@ -34,6 +34,12 @@ const CommentsController = (app) => {
     res.json(comment);
   };
 
+  const getFlaggedComments = async (req, res) => {
+    const comments = await commentsDao.getFlaggedComments();
+    res.json(comments);
+  };
+
+  app.get("/api/comments/flagged", getFlaggedComments);
   app.get("/api/comments/:itemType/:itemId", getAllCommentsByItem);
   app.get("/api/comments/:username", getAllCommentsByUsername);
   app.post("/api/comments", createComment);

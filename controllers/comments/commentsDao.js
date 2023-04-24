@@ -8,6 +8,14 @@ export const getAllCommentsByUsername = (username) => {
     return commentsModel.find({username});
 };
 
+export const getLatestComments = () => {
+    return commentsModel.find().sort({ _id: -1 }).limit(50);
+};
+
+export const getFlaggedComments = () => {
+    return commentsModel.find({isFlagged: true});
+};
+
 export const createComment = (comment) => {
     return commentsModel.create(comment);
 };

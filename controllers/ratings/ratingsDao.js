@@ -8,6 +8,10 @@ export const getAllRatingsByUsername = (username) => {
     return ratingsModel.find({username});
 };
 
+export const getLatestRatings = () => {
+    return ratingsModel.find().sort({ _id: -1 }).limit(50);
+};
+
 export const createRating = (rating) => {
     return ratingsModel.create(rating);
 };

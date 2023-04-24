@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const IGDB_API_URL = "https://api.igdb.com/v4";
+export const IGDB_API_URL = "https://api.igdb.com/v4";
 
-const config = {
+export const config = {
   headers: {
     // "Client-ID": process.env.CLIENT_ID,
     // Authorization: process.env.ACCESS_TOKEN
